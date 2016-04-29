@@ -1,0 +1,58 @@
+package com.deluxeflame.plone;
+
+import java.util.logging.Logger;
+
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.PluginDescriptionFile;
+import org.bukkit.plugin.java.JavaPlugin;
+
+
+public class Main extends JavaPlugin {
+
+	public void onEnable() {
+		this.saveDefaultConfig();
+		getLogger().info("Plugin Enabled!");
+		
+	} 
+
+	public void onDisable(){
+		
+	} 
+	String InGamePrefix = getConfig().getString("InGamePrefix");
+	String InGameMessages = getConfig().getString("InGameMessages");
+	
+	public boolean oncommand(CommandSender sender, Command cmd, String label, String[] args){
+
+		if(label.equalsIgnoreCase("shop")) {
+
+			
+		if (!(sender instanceof Player)) {
+			
+			String NotAPlayerPrefix = getConfig().getString("NotAPlayerPrefix");
+			String NotAPlayerMessage = getConfig().getString("NotAPlayerMessage");
+			sender.sendMessage(ChatColor.translateAlternateColorCodes('&', NotAPlayerPrefix + ChatColor.translateAlternateColorCodes('&', NotAPlayerMessage)));
+			return false;
+			
+		}
+		
+        Bukkit.dispatchCommand(sender, "warp shop");
+        
+		Player player = (Player) sender;
+
+		String InGamePrefix = getConfig().getString("InGamePrefix");
+		String InGameMessage = getConfig().getString("InGameMessage");
+	    player.sendMessage(ChatColor.translateAlternateColorCodes('&', InGamePrefix + ChatColor.translateAlternateColorCodes('&', InGameMessage)));
+		return false;
+	
+	}
+		return false;
+	
+		
+		
+	}
+	
+}
